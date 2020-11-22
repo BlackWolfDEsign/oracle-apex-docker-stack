@@ -25,17 +25,17 @@ services:
     volumes:
       - ./volumes/ol7_19_ords_tomcat:/u01/config/instance1
     environment:
-      - DB_HOSTNAME=db
-      - DB_PORT=1521
-      - DB_SERVICE=pdb1
-      - APEX_PUBLIC_USER_PASSWORD=ApexPassword1
-      - APEX_TABLESPACE=APEX
-      - TEMP_TABLESPACE=TEMP
-      - APEX_LISTENER_PASSWORD=ApexPassword1
-      - APEX_REST_PASSWORD=ApexPassword1
-      - PUBLIC_PASSWORD=ApexPassword1
-      - SYS_PASSWORD=SysPassword1
-      - KEYSTORE_PASSWORD=KeystorePassword1
+      - DB_HOSTNAME=${DB_HOSTNAME}
+      - DB_PORT=${DB_PORT}
+      - DB_SERVICE=${DB_SERVICE}
+      - APEX_PUBLIC_USER_PASSWORD=${APEX_PUBLIC_USER_PASSWORD}
+      - APEX_TABLESPACE=${APEX_TABLESPACE}
+      - TEMP_TABLESPACE=${TEMP_TABLESPACE}
+      - APEX_LISTENER_PASSWORD=${APEX_LISTENER_PASSWORD}
+      - APEX_REST_PASSWORD=${APEX_REST_PASSWORD}
+      - PUBLIC_PASSWORD=${PUBLIC_PASSWORD}
+      - SYS_PASSWORD=${SYS_PASSWORD}
+      - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
     ports:
       - "8080:8080"
       - "8443:8443"
@@ -54,10 +54,10 @@ services:
     volumes:
       - ./volumes/ol7_19_ords_db:/u02
     environment:
-      - SYS_PASSWORD=SysPassword1
-      - PDB_PASSWORD=PdbPassword1
-      - APEX_EMAIL=me@example.com
-      - APEX_PASSWORD=ApexPassword1
+      - SYS_PASSWORD=${SYS_PASSWORD}
+      - PDB_PASSWORD=${PDB_PASSWORD}
+      - APEX_EMAIL=${APEX_EMAIL}
+      - APEX_PASSWORD=${APEX_PASSWORD}
     ports:
       - "1521:1521"
     networks:
