@@ -37,8 +37,8 @@ services:
       - SYS_PASSWORD=${SYS_PASSWORD}
       - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
     ports:
-      - "${HTTP_PORT}:8080"
-      - "${HTTPS_PORT}:8443"
+      - "${HTTP_BIND:-0.0.0.0}:${HTTP_PORT:-8080}:${HTTP_PORT:-8080}"
+      - "${HTTPS_BIND:-0.0.0.0}:${HTTPS_PORT:-8443}:${HTTPS_PORT:-8443}"
     networks:
       - oracle_network
     restart: unless-stopped
