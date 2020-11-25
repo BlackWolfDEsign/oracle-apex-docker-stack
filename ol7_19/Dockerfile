@@ -27,7 +27,7 @@ ENV ORACLE_BASE=/u01/app/oracle                                                \
     ORACLE_PASSWORD="oracle"                                                   \
     SCRIPTS_DIR=/u01/scripts                                                   \
     ORAENV_ASK=NO															   \
-    DOCKER_USER=${CONTAINER_PREFIX}
+    DOCKER_USER="docker_and_apex"
 
 # Separate ENV call to allow existing variables to be referenced.
 ENV PATH=${ORACLE_HOME}/bin:${PATH}
