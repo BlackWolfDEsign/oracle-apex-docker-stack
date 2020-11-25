@@ -56,8 +56,8 @@ COPY scripts/* ${SCRIPTS_DIR}/
 #
 RUN groupadd -g 500 dba                                                     && \
     groupadd -g 501 oinstall                                                && \
-    groupadd -g 1042 docker_fg                                    && \
-    useradd -d /home/oracle -u 500 -g dba -G oinstall,docker_fg -m -s /bin/bash oracle   && \
+    groupadd -g 1042 ${CONTAINER_PREFIX}                                    && \
+    useradd -d /home/oracle -u 500 -g dba -G oinstall,${CONTAINER_PREFIX} -m -s /bin/bash oracle   && \
     yum -y install unzip tar gzip                                           && \
     yum -y update                                                           && \
     yum -y install oracle-database-preinstall-19c                           && \
@@ -66,7 +66,7 @@ RUN groupadd -g 500 dba                                                     && \
     mkdir -p /u02/oradata                                                   && \
     chown -R oracle.oinstall /u01                                           && \
     chmod u+x ${SCRIPTS_DIR}/*.sh                                           && \
-    chown -R oracle:docker_fg /u02                                && \
+    chown -R oracle:${CONTAINER_PREFIX} /u02                                && \
     chmod -R 775 /u02                                                       && \
     chmod -R g+s /u02
 
@@ -86,7 +86,7 @@ RUN ${ORACLE_HOME}/runInstaller -ignorePrereq                                  \
     ORACLE_HOSTNAME=${HOSTNAME}                                                \
     UNIX_GROUP_NAME=oinstall                                                   \
     INVENTORY_LOCATION=${ORA_INVENTORY}                                        \
-    SELECTED_LANGUAGES=en,en_GB                                                \
+    SELECTED_LANGUAGES=en,en_GB,de,de_DE                                       \
     ORACLE_HOME=${ORACLE_HOME}                                                 \
     ORACLE_BASE=${ORACLE_BASE}                                                 \
     oracle.install.db.InstallEdition=EE                                        \
