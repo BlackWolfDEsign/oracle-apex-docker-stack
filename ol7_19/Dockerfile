@@ -26,8 +26,7 @@ ENV ORACLE_BASE=/u01/app/oracle                                                \
     APEX_SOFTWARE="apex_20.2.zip"                                              \
     ORACLE_PASSWORD="oracle"                                                   \
     SCRIPTS_DIR=/u01/scripts                                                   \
-    ORAENV_ASK=NO															   \
-    CONTAINER_NAME="docker_and_apex"
+    ORAENV_ASK=NO
 
 # Separate ENV call to allow existing variables to be referenced.
 ENV PATH=${ORACLE_HOME}/bin:${PATH}
@@ -57,8 +56,8 @@ COPY scripts/* ${SCRIPTS_DIR}/
 #
 RUN groupadd -g 500 dba                                                     && \
     groupadd -g 501 oinstall                                                && \
-    groupadd -g 1042 ${CONTAINER_NAME}		                                && \
-    useradd -d /home/oracle -u 500 -g dba -G oinstall,dba,${CONTAINER_NAME} -m -s /bin/bash oracle   && \
+    groupadd -g 1042 docker_fg		                            		    && \
+    useradd -d /home/oracle -u 500 -g dba -G oinstall,dba,docker_fg -m -s /bin/bash oracle   && \
     yum -y install unzip tar gzip                                           && \
     yum -y update                                                           && \
     yum -y install oracle-database-preinstall-19c                           && \
@@ -67,7 +66,7 @@ RUN groupadd -g 500 dba                                                     && \
     mkdir -p /u02/oradata                                                   && \
     chown -R oracle.oinstall /u01                                           && \
     chmod u+x ${SCRIPTS_DIR}/*.sh                                           && \
-    chown -R oracle:${CONTAINER_NAME} /u02        		                    && \
+    chown -R oracle:docker_fg /u02        		                 		    && \
     chmod -R 775 /u02                                                       && \
     chmod -R g+s /u02
 

@@ -15,7 +15,7 @@ version: '3'
 services:
   # ORDS service
   ords:
-    container_name: apex_ords
+    container_name: ${CONTAINER_NAME}_ords
     build:
       context: ./ol7_ords/
       dockerfile: Dockerfile
@@ -46,7 +46,7 @@ services:
 
   # Oracle Database service
   db:
-    container_name: apex_db
+    container_name: ${CONTAINER_NAME}_db
     build:
       context: ./ol7_19/
       dockerfile: Dockerfile
