@@ -27,6 +27,7 @@ ENV ORACLE_BASE=/u01/app/oracle                                                \
     ORACLE_PASSWORD="oracle"                                                   \
     SCRIPTS_DIR=/u01/scripts                                                   \
     ORAENV_ASK=NO
+    CONTAINER_PREFIX=${CONTAINER_PREFIX}
 
 # Separate ENV call to allow existing variables to be referenced.
 ENV PATH=${ORACLE_HOME}/bin:${PATH}
