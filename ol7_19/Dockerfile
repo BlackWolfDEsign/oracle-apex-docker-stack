@@ -57,7 +57,7 @@ COPY scripts/* ${SCRIPTS_DIR}/
 #
 RUN groupadd -g 500 dba                                                     && \
     groupadd -g 501 oinstall                                                && \
-    groupadd -g 1042 ${DOCKER}				                                    && \
+    groupadd -g 1042 ${DOCKER_USER}		                                    && \
     useradd -d /home/oracle -u 500 -g dba -G oinstall,${DOCKER_USER} -m -s /bin/bash oracle   && \
     yum -y install unzip tar gzip                                           && \
     yum -y update                                                           && \
