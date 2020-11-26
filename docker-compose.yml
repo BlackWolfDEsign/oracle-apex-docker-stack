@@ -36,10 +36,15 @@ services:
       - PUBLIC_PASSWORD=${PUBLIC_PASSWORD}
       - SYS_PASSWORD=${SYS_PASSWORD}
       - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
+      - BIND_ADDRESS=${BIND_ADDRESS}
+      - APEX_HTTP_PORT=${APEX_HTTP_PORT}
+      - APEX_HTTPS_PORT=${APEX_HTTPS_PORT}
+      - PORTAINER_PORT=${PORTAINER_PORT}
       - CONTAINER_NAME=${CONTAINER_NAME}
     ports:
-      - "${HTTP_BIND:-0.0.0.0}:${HTTP_PORT:-8080}:${HTTP_PORT:-8080}"
-      - "${HTTPS_BIND:-0.0.0.0}:${HTTPS_PORT:-8443}:${HTTPS_PORT:-8443}"
+      - "${BIND_ADDRESS}:${APEX_HTTP_PORT}:8080"
+      - "${BIND_ADDRESS}:${APEX_HTTPS_PORT}:8443"
+
     networks:
       - oracle_network
     restart: unless-stopped
@@ -72,7 +77,7 @@ services:
       - portainer_data:/data
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
-      - "9000:9000"
+      - "${BIND_ADDRESS}:${PORTAINER_PORT}:9000"
     restart: unless-stopped
 
 volumes:
